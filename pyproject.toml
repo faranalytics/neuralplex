@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "neuralplex"
 version = "0.0.1"
 authors = [
-  { name="FAR", email="adam@farar.net" },
+  { name="FAR Analytics & Research", email="adam@farar.net" },
 ]
 description = "A Neuralplex."
 readme = "README.md"
