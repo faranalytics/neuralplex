@@ -13,7 +13,7 @@ l1 = Layer(
 )
 
 l2 = Layer(
-    perceptrons=[Perceptron(coef=random.randint(0, 1)) for i in range(0, 1000)], deg=2
+    perceptrons=[Perceptron(coef=random.randint(0, 1)) for i in range(0, 100)], deg=2
 )
 
 l3 = Layer(perceptrons=[Perceptron(coef=random.randint(0, 1))], deg=1)
