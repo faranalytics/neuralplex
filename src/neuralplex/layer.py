@@ -8,7 +8,6 @@ class Layer:
     def __init__(self, neurons: List[Neuron], step: float = None):
         self.neurons = neurons
         self.step = step
-
         if not self.step is None:
             for neuron in self.neurons:
                 if neuron.step is None:
