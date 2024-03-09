@@ -52,7 +52,7 @@ n1.train([1,1,1,1], [15])
 ```
 
 #### Generate and print a prediction.
-Because the network underwent just one iteration of training, the estimate will likely be inaccurate.  The accuracy of the prediction can be improved by iteratively training the network.  Please see the [Visualize a Neural-pleX Network](#visualize-a-neural-plex-network) implementation for an example of how to iteratively train the network.
+Because the network underwent just one iteration of training, the estimate will likely be inaccurate.  The accuracy of the prediction can be improved by iteratively training the network.  Please see the [Train and Visualize a Neural-pleX Network](#train-and-visualize-a-neural-plex-network) implementation for an example of how to iteratively train the network.
 ```python
 prediction = n1.predict([1,1,1,1])
 print(prediction)
