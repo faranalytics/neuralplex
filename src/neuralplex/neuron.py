@@ -21,24 +21,20 @@ class Neuron:
     def connectRHS(self, neuronRHS: Self) -> None:
         if neuronRHS not in self.neuronsRHS:
             self.neuronsRHS.append(neuronRHS)
-
         if self not in neuronRHS.neuronsLHS:
             neuronRHS.connectLHS(self)
 
     def connectLHS(self, neuronLHS: Self) -> None:
         if neuronLHS not in self.neuronsLHS:
             self.neuronsLHS.append(neuronLHS)
-
         if self not in neuronLHS.neuronsRHS:
             neuronLHS.connectRHS(self)
 
     def disconnectRHS(self, neuronRHS: Self) -> None:
         if neuronRHS in self.neuronsRHS:
             self.neuronsRHS.remove(neuronRHS)
-
         if self in neuronRHS.neuronsLHS:
             neuronRHS.disconnectLHS(self)
-
         if len(self.neuronsRHS) == 0:
             for neuron in self.neuronsLHS:
                 neuron.disconnectRHS(self)
@@ -46,10 +42,8 @@ class Neuron:
     def disconnectLHS(self, neuronLHS: Self) -> None:
         if neuronLHS in self.neuronsLHS:
             self.neuronsLHS.remove(neuronLHS)
-
         if self in neuronLHS.neuronsRHS:
             neuronLHS.disconnectRHS(self)
-
         if len(self.neuronsLHS) == 0:
             for neuron in self.neuronsRHS:
                 neuron.disconnectLHS(self)
@@ -80,5 +74,4 @@ class Neuron:
                 else:
                     neuron.propagate(math.copysign(1, error_total), self)
                 # Likewise, the "backpropagation" still needs a lot of work.
-
             self.propagation = {}
