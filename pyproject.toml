@@ -4,17 +4,21 @@ build-backend = "hatchling.build"
 
 [project]
 name = "neuralplex"
-version = "0.0.1"
+version = "0.0.7"
 authors = [
   { name="FAR Analytics & Research", email="adam@farar.net" },
 ]
-description = "A Neuralplex."
+description = "An object oriented neural network implementation."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+]
+dependencies = [
+"scikit-learn",
+"scipy"
 ]
 
 [project.urls]

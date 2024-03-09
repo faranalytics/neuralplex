@@ -1,14 +1,20 @@
+from typing import List, Self
+
+from neuralplex.neuron import Neuron
+
+
 class Layer:
 
-    def __init__(self, perceptrons, deg):
-        self.perceptrons = perceptrons
-        self.deg = deg
+    def __init__(self, neurons: List[Neuron], step: float = None):
+        self.neurons = neurons
+        self.step = step
 
-        if self.deg:
-            for perceptron in self.perceptrons:
-                perceptron.deg = self.deg
+        if not self.step is None:
+            for neuron in self.neurons:
+                if neuron.step is None:
+                    neuron.step = self.step
 
-    def connect(self, layer):
-        for p1 in self.perceptrons:
-            for p2 in layer.perceptrons:
-                p1.connect(p2)
+    def connect(self, layer: Self) -> None:
+        for p1 in self.neurons:
+            for p2 in layer.neurons:
+                p1.connectRHS(p2)
