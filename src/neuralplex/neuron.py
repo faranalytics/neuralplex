@@ -79,6 +79,6 @@ class Neuron:
                     neuron.propagate(error_total, self)
                 else:
                     neuron.propagate(math.copysign(1, error_total), self)
-                # Likewise, the "back-propagation" still needs a lot of work.
+                # Likewise, the "backpropagation" still needs a lot of work.
 
             self.propagation = {}
