@@ -4,14 +4,14 @@ An object oriented neural network implementation.
 
 ## Introduction
 
-**Neural-pleX** is an intuitive object oriented neural network implementation. The Neural-pleX API consists of Network, Layer, and Neuron constructors. The networks can be easily [visualized](#visualize-a-neural-plex-network) using a visualization library. 
+**Neural-pleX** is an intuitive object oriented neural network implementation. The Neural-pleX API consists of Network, Layer, and Neuron constructors. The networks can be easily [visualized](#visualizations-of-the-network-before-and-after-training) using a visualization library. 
 
-## Table of Contents<img src="Neural-pleX_float.png" style="width:50%" align="right">
+## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
     - [Create a 3 Layer Neural Network](#create-a-3-layer-neural-network)
 - [Examples](#examples)
-    - [Visualize a Neural-pleX Network](#visualize-a-neural-plex-network)
+    - [Train and Visualize a Neural-pleX Network](#train-and-visualize-a-neural-plex-network)
 - [Tests](#tests)
     - [The Nibble Challenge](#the-nibble-challenge)
 
@@ -37,6 +37,7 @@ STEP = 1e-4
 ```
 
 #### Construct a neural network by specifying the Neurons for each Layer and adding the Layers to a Network.
+The resulting neural network will have 4 inputs and 1 ouput.
 ```python
 l1 = Layer(neurons=[Neuron(m=random()) for i in range(0, 4)], step=STEP)
 l2 = Layer(neurons=[Neuron(m=random()) for i in range(0, 8)], step=STEP)
@@ -51,27 +52,68 @@ n1.train([1,1,1,1], [15])
 ```
 
 #### Generate and print a prediction.
-Because the network underwent one iteration of training, the estimate will likely be inaccurate.
+Because the network underwent just one iteration of training, the estimate will likely be inaccurate.  The accuracy of the prediction can be improved by iteratively training the network.  Please see the [Visualize a Neural-pleX Network](#visualize-a-neural-plex-network) implementation for an example of how to iteratively train the network.
 ```python
 prediction = n1.predict([1,1,1,1])
 print(prediction)
 ```
 
 ## Examples
-### Visualize a Neural-pleX Network
+### Train and Visualize a Neural-pleX Network
 
 In this example you will use [D3](https://d3js.org/) and [D3Blocks](https://d3blocks.github.io/d3blocks/pages/html/index.html) in order to visualize a neural network *before* and *after* training.
+
+#### Import the necessary dependencies.
+```python
+from random import random, randint
+import pandas as pd
+from neuralplex import Network, Layer, Neuron, get_edge_data
+from d3blocks import D3Blocks
+```
+#### Implement a function that will visualize the network.
+```python
+def vizualize(n):
+
+    d3 = D3Blocks()
+
+    df = pd.DataFrame(get_edge_data(n))
+
+    df['weight'] = df['weight'] * 42
+
+    d3.d3graph(df, charge=1e4, filepath=None)
+
+    for index, source, target, weight in df.to_records():
+        if source.startswith('l1'):
+            color = 'green'
+        elif source.startswith('l2'):
+            color = 'red'
+        else:
+            color='yellow'
+
+        d3.D3graph.node_properties[source]['color'] = color
+        d3.D3graph.node_properties[source]['size'] = weight
+
+    d3.D3graph.show(save_button=True, filepath='./Neural-pleX.html')
+```
+
+#### Set a STEP.
+```python
+STEP = 1e-5
+```
 
 #### Construct a network.
 ```python
 n = Network([Layer(neurons=[Neuron(m=random(), name=f'l{layer}-p{i}') for i in range(1, size+1)], step=STEP) for layer, size in zip([1,2,3], [4, 8, 1])])
 ```
 
+#### Use D3 and D3Blocks in order to visualize the network *before* training.
+```python
+visualize(n)
+```
+
 #### Train the network.
 ```python
 for i in range(0, int(1e5)):
-    if i % 1000 == 0:
-        print(i)
     rn = randint(1, 15)
     b = [int(n) for n in bin(rn)[2:]]
     while len(b) < 4:
@@ -79,39 +121,17 @@ for i in range(0, int(1e5)):
     n.train(b, [rn])
 ```
 
-#### Use D3 and D3Blocks in order to create a visualization of the Network.
-You can visualize the network before and after training.
+#### Use D3 and D3Blocks in order to visualize the network *after* training.
 ```python
-records = []
-for layer in n.layers:
-    for p1 in layer.neurons:
-        for p2 in p1.neuronsRHS:
-            records.append({'source':p1.name, 'target':p2.name, 'weight':p1.m})
-
-df = pd.DataFrame(records) 
-df['weight'] = df['weight'] * 42
-
-d3 = D3Blocks()
-d3.d3graph(df, charge=1e4*3, filepath=None)
-
-for index, source, target, weight in df.to_records():
-    if source.startswith('l1'):
-        color = 'green'
-    else:
-        color = 'red'
-    d3.D3graph.node_properties[source]['color'] = color
-    d3.D3graph.node_properties[source]['size'] = weight
-
-d3.D3graph.node_properties['l3-p1']['color'] = '#FFCB05'
-d3.D3graph.show(filepath='./Neural-pleX.html')
+visualize(n)
 ```
 
-##### The green nodes comprise the inputs, the red nodes comprise the hidden layer, and the yellow node is the output.  The size of the Neuron is proportional to its coefficient.
+#### Visualizations of the network before and after training:
+The green nodes comprise the inputs, the red nodes comprise the hidden layer, and the yellow node is the output.  The size of the Neuron is proportional to its coefficient and dependent on its random initialization and subsequent training.
 
-Before Taining                                                   |After Training
+Before Training                                                   |After Training
 :---------------------------------------------------------------:|:-------------------------------------------------------------:
-![Neural-pleX Before Training](Neural-pleX_before_training.png)  |  ![Neural-pleX After Training](Neural-pleX_after_training.png)
-
+![Neural-pleX Before Training](./images/Neural-pleX_before_training.png)|![Neural-pleX After Training](./images/Neural-pleX_after_training.png)
 ## Tests
 
 ### The Nibble Challenge

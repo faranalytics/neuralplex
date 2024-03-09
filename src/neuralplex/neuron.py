@@ -8,8 +8,8 @@ class Neuron:
 
     def __init__(self, m: float, b: float = 0, step: float = None, name=None):
 
-        self.m = m
-        self.b = b
+        self.m = m # coefficient
+        self.b = b # "lift"
         self.name = name
         self.step = step
 
@@ -84,13 +84,13 @@ class Neuron:
                 # This is a primitive implementation; however, I have some ideas for how to improve it.
                 # Please let me know if you have any thoughts on how this should be implemented.
 
-            for p in self.neuronsLHS:
-                p_activation_value = self.activation[p]
+            for neuron in self.neuronsLHS:
+                neuron_activation_value = self.activation[neuron]
 
-                if p_activation_value > 0 and error_total > 0 or p_activation_value < 0 and error_total < 0:
-                    p.propagate(error_total, self)
+                if neuron_activation_value > 0 and error_total > 0 or neuron_activation_value < 0 and error_total < 0:
+                    neuron.propagate(error_total, self)
                 else:
-                    p.propagate(math.copysign(1, error_total), self)
+                    neuron.propagate(math.copysign(1, error_total), self)
                 # Likewise, the "back-propagation" still needs a lot of work.
                     
             self.propagation = {}

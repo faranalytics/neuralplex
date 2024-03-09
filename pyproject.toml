@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "neuralplex"
-version = "0.0.7"
+dynamic = ["version"]
 authors = [
   { name="FAR Analytics & Research", email="adam@farar.net" },
 ]
@@ -20,6 +20,9 @@ dependencies = [
 "scikit-learn",
 "scipy"
 ]
+
+[tool.hatch.version]
+path = "src/neuralplex/__about__.py"
 
 [project.urls]
 Homepage = "https://github.com/faranalytics/neuralplex"

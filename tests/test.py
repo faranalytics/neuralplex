@@ -42,7 +42,7 @@ class Test(unittest.TestCase):
 
 
         ys = []
-        ys_p = []
+        ys_predicted = []
         for i in range(1, 16):
 
             b = [int(n) for n in bin(i)[2:]]
@@ -53,11 +53,11 @@ class Test(unittest.TestCase):
             pn = n1.predict(b)
 
             ys.append(i)
-            ys_p.append(pn[0])
+            ys_predicted.append(pn[0])
 
             print(f"{i} input: {json.dumps(b)}, truth: {i} prediction: {json.dumps(pn)}")
 
-        R2 = r2_score(ys, ys_p)
+        R2 = r2_score(ys, ys_predicted)
 
         print(f"R2: {R2}")
 
