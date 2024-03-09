@@ -7,8 +7,8 @@ from scipy.stats import linregress
 class Neuron:
 
     def __init__(self, m: float, b: float = 0, step: float = None, name=None):
-        self.m = m  # coefficient
-        self.b = b  # "lift"
+        self.m = m  # weight
+        self.b = b  # lift
         self.name = name
         self.step = step
         self.value = 0
