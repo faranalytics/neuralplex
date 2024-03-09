@@ -28,6 +28,7 @@ class Network:
         # Activation Stage
         for i in range(0, len(X_train)):
             self.input_layer.neurons[i].activate(X_train[i])
+            
         # "Backpropagation" Stage
         for i in range(0, len(y_train)):
             y_train = y_train[i]
