@@ -25,9 +25,10 @@ class Network:
                 f"The length of the training values, {len(y_train)}, is not equal to the length of output neurons: {len(self.output_layer.neurons)}"
             )
 
+        # Activation Stage
         for i in range(0, len(X_train)):
             self.input_layer.neurons[i].activate(X_train[i])
-
+        # "Backpropagation" Stage
         for i in range(0, len(y_train)):
             y_train = y_train[i]
             neuron = self.output_layer.neurons[i]
