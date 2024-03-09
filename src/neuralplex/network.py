@@ -16,11 +16,11 @@ class Network:
     def train(self, X_train: List[float], y_train: List[float]) -> None:
         if len(self.input_layer.neurons) != len(X_train):
             raise Exception(
-                f"The length of the training values, {len(X_train)}, is not equal to the length of input neurons: {len(self.input_layer.neurons)}"
+                f"The length of the input training values, {len(X_train)}, is not equal to the length of input neurons: {len(self.input_layer.neurons)}"
             )
         if len(self.output_layer.neurons) != len(y_train):
             raise Exception(
-                f"The length of the training values, {len(y_train)}, is not equal to the length of output neurons: {len(self.output_layer.neurons)}"
+                f"The length of the output training values, {len(y_train)}, is not equal to the length of output neurons: {len(self.output_layer.neurons)}"
             )
 
         # Activation Stage
