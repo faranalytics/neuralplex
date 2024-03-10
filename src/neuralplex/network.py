@@ -36,7 +36,7 @@ class Network:
     def predict(self, X: List[float]) -> List[float]:
         if len(self.input_layer.neurons) != len(X):
             raise Exception(
-                f"The length of the training values, {len(X)}, is not equal to the length of input neurons: {len(self.input_layer.neurons)}"
+                f"The length of the input values, {len(X)}, is not equal to the length of input neurons: {len(self.input_layer.neurons)}"
             )
 
         for i in range(0, len(X)):
