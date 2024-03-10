@@ -33,13 +33,13 @@ class Network:
             neuron = self.output_layer.neurons[i]
             neuron.propagate(neuron.value - y_train, None)
 
-    def predict(self, inputs: List[float]) -> List[float]:
-        if len(self.input_layer.neurons) != len(inputs):
+    def predict(self, X: List[float]) -> List[float]:
+        if len(self.input_layer.neurons) != len(X):
             raise Exception(
-                f"The length of the training values, {len(inputs)}, is not equal to the length of input neurons: {len(self.input_layer.neurons)}"
+                f"The length of the training values, {len(X)}, is not equal to the length of input neurons: {len(self.input_layer.neurons)}"
             )
 
-        for i in range(0, len(inputs)):
-            self.input_layer.neurons[i].activate(inputs[i])
+        for i in range(0, len(X)):
+            self.input_layer.neurons[i].activate(X[i])
 
         return [neuron.value for neuron in self.output_layer.neurons]
