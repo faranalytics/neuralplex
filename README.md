@@ -72,7 +72,7 @@ from d3blocks import D3Blocks
 ```
 #### Implement a function that will visualize the network.
 ```python
-def vizualize(n):
+def visualize(n):
 
     d3 = D3Blocks()
 
