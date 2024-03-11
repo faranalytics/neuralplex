@@ -57,7 +57,7 @@ class Neuron:
             self.value = self.m * sum(self.activation.values())
             for neuron in self.neuronsRHS:
                 neuron.activate(self.value, self)
-                # Under what conditions should an activation take place?
+                # Under what conditions should an activation value be propagated?
             self.activation_count = 0
 
     def propagate(self, error: float, neuron: Self = None) -> None:
