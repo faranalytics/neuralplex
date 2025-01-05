@@ -29,9 +29,9 @@ class Network:
 
         # Backpropagation Stage
         for i in range(0, len(y_train)):
-            y_train = y_train[i]
+            yi = y_train[i]
             neuron = self.output_layer.neurons[i]
-            neuron.propagate(neuron.value - y_train, None)
+            neuron.propagate(neuron.value - yi, None)
 
     def predict(self, X: List[float]) -> List[float]:
         if len(self.input_layer.neurons) != len(X):
