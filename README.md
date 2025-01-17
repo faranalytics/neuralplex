@@ -213,3 +213,8 @@ Ran 1 test in 0.333s
 
 OK
 ```
+
+## Support
+If you have a feature request or run into any issues, feel free to submit an [issue](https://github.com/faranalytics/neuralplex/issues) or start a [discussion](https://github.com/faranalytics/neuralplex/discussions). You’re also welcome to reach out directly to one of the authors at any time.
+
+- [Adam Patterson](https://github.com/adamjpatterson)
