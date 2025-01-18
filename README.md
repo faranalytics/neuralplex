@@ -6,12 +6,12 @@ An object oriented neural network implementation.
 
 **Neural-pleX** is an intuitive object oriented neural network implementation. The Neural-pleX API consists of Network, Layer, and Neuron constructors. The networks can be easily [visualized](#visualizations-of-the-network-before-and-after-training) using a visualization library.
 
-## Table of Contents
+## Table of contents
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Examples](#examples)
-- [Tests](#tests)
+- [Example](#example)
+- [Test](#test)
 
 ## Installation
 
@@ -23,21 +23,23 @@ pip install neuralplex
 
 This implementation demonstrates each component of the API. A 3 layer neural network is constructed that has a 4 neuron input Layer and a 1 neuron output layer. The hidden layer has 8 neurons.
 
-### Instructions
+### Implement a 3 layer neural network
 
-Import the Network, Layer, and Neuron classes.
+#### Import the Network, Layer, and Neuron classes.
 
 ```python
 from neuralplex import Network, Layer, Neuron
 ```
 
-Set a step.
+#### Set a step.
 
 ```python
 STEP = 1e-4
 ```
 
-Construct a neural network by specifying the Neurons for each Layer and adding the Layers to a Network. The resulting neural network will have 4 inputs and 1 ouput.
+#### Construct a neural network by specifying the Neurons for each Layer and adding the Layers to a Network. 
+
+The resulting neural network will have 4 input neurons, 1 ouput neuron, and 8 neurons in the hidden layer.
 
 ```python
 l1 = Layer(neurons=[Neuron(m=random()) for i in range(0, 4)], step=STEP)
@@ -46,7 +48,9 @@ l3 = Layer(neurons=[Neuron(m=random())], step=STEP)
 n1 = Network([l1, l2, l3])
 ```
 
-With the `Network` define, you can train the network. Here the network is trained to recognize the nibble 1111 as the decimal number 15.
+#### With the `Network` defined, you can train the network. 
+
+Here the network is trained to recognize the nibble 1111 as the decimal number 15.
 
 ```python
 n1.train([1,1,1,1], [15])
@@ -59,13 +63,13 @@ prediction = n1.predict([1,1,1,1])
 print(prediction)
 ```
 
-## Examples
+## Example
 
-### Train and Visualize a Neural-pleX Network
+### Train and visualize a Neural-pleX network
 
 In this example you will use [D3](https://d3js.org/) and [D3Blocks](https://d3blocks.github.io/d3blocks/pages/html/index.html) in order to visualize a neural network _before_ and _after_ training.
 
-Import the necessary dependencies.
+#### Import the necessary dependencies.
 
 ```python
 from random import random, randint
@@ -74,7 +78,7 @@ from neuralplex import Network, Layer, Neuron, get_edge_data
 from d3blocks import D3Blocks
 ```
 
-Implement a function that will visualize the network.
+#### Implement a function that will visualize the network.
 
 ```python
 def visualize(n):
@@ -101,25 +105,25 @@ def visualize(n):
     d3.D3graph.show(save_button=True, filepath='./Neural-pleX.html')
 ```
 
-Set a step.
+#### Set a step.
 
 ```python
 STEP = 1e-5
 ```
 
-Construct a network.
+#### Construct a network.
 
 ```python
 n = Network([Layer(neurons=[Neuron(m=random(), name=f'l{layer}-p{i}') for i in range(1, size+1)], step=STEP) for layer, size in zip([1,2,3], [4, 8, 1])])
 ```
 
-Use D3 and D3Blocks in order to visualize the network _before_ training.
+#### Use D3 and D3Blocks in order to visualize the network _before_ training.
 
 ```python
 visualize(n)
 ```
 
-Train the network.
+#### Train the network.
 
 ```python
 for i in range(0, int(1e5)):
@@ -130,13 +134,13 @@ for i in range(0, int(1e5)):
     n.train(b, [rn])
 ```
 
-Use D3 and D3Blocks in order to visualize the network _after_ training.
+#### Use D3 and D3Blocks in order to visualize the network _after_ training.
 
 ```python
 visualize(n)
 ```
 
-#### Visualizations of the network before and after training:
+##### Visualizations of the network before and after training:
 
 The green nodes comprise the inputs, the red nodes comprise the hidden layer, and the yellow node is the output. The size of the Neuron is proportional to its coefficient and dependent on its random initialization and subsequent training.
 
@@ -144,39 +148,37 @@ The green nodes comprise the inputs, the red nodes comprise the hidden layer, an
 | :----------------------------------------------------------------------: | :--------------------------------------------------------------------: |
 | ![Neural-pleX Before Training](./images/Neural-pleX_before_training.png) | ![Neural-pleX After Training](./images/Neural-pleX_after_training.png) |
 
-## Tests
+## Test
 
-### The Nibble Challenge
-
-#### Clone the repository and run the test.
+### How to run the Nibble Challenge
 
 A model is trained that estimates a decimal value given a binary nibble.
 
-Clone the repository.
+#### Clone the repository.
 
 ```bash
 git clone https://github.com/faranalytics/neuralplex.git
 ```
 
-Change directory into the repository.
+#### Change directory into the repository.
 
 ```bash
 cd neuralplex
 ```
 
-Install the package in editable mode.
+#### Install the package in editable mode.
 
 ```bash
 pip install -e .
 ```
 
-Run the tests.
+#### Run the tests.
 
 ```bash
 python -m unittest -v
 ```
 
-#### Output
+##### Output
 
 ```bash
 test_nibbles (tests.test.Test.test_nibbles) ... Training the model.
@@ -215,6 +217,6 @@ OK
 ```
 
 ## Support
-If you have a feature request or run into any issues, feel free to submit an [issue](https://github.com/faranalytics/neuralplex/issues) or start a [discussion](https://github.com/faranalytics/neuralplex/discussions). You’re also welcome to reach out directly to one of the authors at any time.
+If you have a feature request or run into any issues, feel free to submit an [issue](https://github.com/faranalytics/neuralplex/issues) or start a [discussion](https://github.com/faranalytics/neuralplex/discussions). You’re also welcome to reach out directly to one of the authors.
 
 - [Adam Patterson](https://github.com/adamjpatterson)
