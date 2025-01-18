@@ -48,7 +48,7 @@ l3 = Layer(neurons=[Neuron(m=random())], step=STEP)
 n1 = Network([l1, l2, l3])
 ```
 
-#### With the `Network` defined, you can train the network. 
+#### With the Network defined, you can train the network. 
 
 Here the network is trained to recognize the nibble 1111 as the decimal number 15.
 
