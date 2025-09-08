@@ -4,7 +4,7 @@
 [![Python versions](https://img.shields.io/pypi/pyversions/neuralplex.svg)](https://pypi.org/project/neuralplex/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-An object oriented neural network implementation.
+An object oriented educational/experimental neural network implementation.
 
 ## Introduction
 
